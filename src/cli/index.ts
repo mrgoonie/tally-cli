@@ -11,7 +11,7 @@ const program = new Command();
 program
   .name("tally")
   .description("Command-line interface for the Tally API")
-  .version("0.1.0")
+  .version("0.1.1")
   .option("--api-key <key>", "Tally API key (overrides env/config)")
   .option("--base-url <url>", "API base URL (default: https://api.tally.so)")
   .option("--json", "Emit machine-readable JSON instead of tables");

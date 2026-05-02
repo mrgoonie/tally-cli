@@ -15,11 +15,10 @@ export function emit(data: unknown, opts: OutputOptions = {}): void {
     process.stdout.write(formatTable(data) + "\n");
     return;
   }
-  if (isPaginated(data)) {
-    process.stdout.write(formatTable(data.items) + "\n");
-    process.stdout.write(
-      `\npage ${data.page} • ${data.items.length}/${data.total} • hasMore=${data.hasMore}\n`,
-    );
+  const tabular = extractTabular(data);
+  if (tabular) {
+    process.stdout.write(formatTable(tabular.rows) + "\n");
+    if (tabular.footer) process.stdout.write("\n" + tabular.footer + "\n");
     return;
   }
   if (typeof data === "object") {
@@ -29,19 +28,53 @@ export function emit(data: unknown, opts: OutputOptions = {}): void {
   process.stdout.write(String(data) + "\n");
 }
 
-interface PaginatedShape {
-  page: number;
-  total: number;
-  hasMore: boolean;
-  items: unknown[];
+// Tally responses use varying array field names per resource:
+// forms/workspaces use `items`; submissions use `submissions`; webhooks use `webhooks`; etc.
+// Total count field is either `total` or `totalCount`.
+const ROW_FIELDS = [
+  "items",
+  "submissions",
+  "webhooks",
+  "questions",
+  "blocks",
+  "forms",
+  "workspaces",
+  "users",
+  "invites",
+  "events",
+];
+
+interface Tabular {
+  rows: unknown[];
+  footer?: string;
 }
-function isPaginated(d: unknown): d is PaginatedShape {
-  return (
-    !!d &&
-    typeof d === "object" &&
-    Array.isArray((d as Record<string, unknown>).items) &&
-    typeof (d as Record<string, unknown>).page === "number"
-  );
+
+function extractTabular(d: unknown): Tabular | null {
+  if (!d || typeof d !== "object") return null;
+  const o = d as Record<string, unknown>;
+  let rowsField: string | null = null;
+  for (const f of ROW_FIELDS) {
+    if (Array.isArray(o[f])) {
+      rowsField = f;
+      break;
+    }
+  }
+  if (!rowsField) return null;
+  const rows = o[rowsField] as unknown[];
+  const total =
+    typeof o.total === "number"
+      ? o.total
+      : typeof o.totalCount === "number"
+        ? o.totalCount
+        : undefined;
+  let footer: string | undefined;
+  if (typeof o.page === "number") {
+    const totalStr = total !== undefined ? `/${total}` : "";
+    footer = `page ${o.page} • ${rows.length}${totalStr} • hasMore=${o.hasMore ?? false}`;
+  } else if (total !== undefined) {
+    footer = `${rows.length}/${total}`;
+  }
+  return { rows, footer };
 }
 
 function formatTable(rows: unknown[]): string {
