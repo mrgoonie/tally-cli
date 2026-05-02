@@ -5,7 +5,7 @@ Command-line interface for the [Tally](https://tally.so) API. Manage forms, subm
 ## Install
 
 ```bash
-npm i -g tally-cli
+npm i -g @mrgoonie/tally-cli
 ```
 
 Requires Node ≥18.
@@ -45,7 +45,7 @@ See [docs/cli.md](docs/cli.md) for the full command reference.
 ## Library use
 
 ```ts
-import { TallyClient, forms } from "tally-cli";
+import { TallyClient, forms } from "@mrgoonie/tally-cli";
 
 const c = new TallyClient({ apiKey: process.env.TALLY_API_KEY! });
 const list = await forms.list(c, { limit: 50 });

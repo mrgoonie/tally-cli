@@ -1,5 +1,5 @@
 {
-  "name": "tally-cli",
+  "name": "@mrgoonie/tally-cli",
   "version": "0.1.0",
   "description": "Command-line interface for Tally (https://tally.so) — manage forms, submissions, webhooks, workspaces.",
   "license": "MIT",

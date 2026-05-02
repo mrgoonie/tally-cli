@@ -10,7 +10,7 @@ Use this skill when the user wants to interact with [Tally](https://tally.so) â€
 ## Install & auth
 
 ```bash
-npm i -g tally-cli
+npm i -g @mrgoonie/tally-cli
 export TALLY_API_KEY=tly_xxx       # or: tally login --api-key tly_xxx
 tally doctor                       # verify
 ```
