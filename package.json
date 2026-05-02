@@ -29,6 +29,9 @@
     "prepublishOnly": "npm run build"
   },
   "keywords": ["tally", "tally.so", "cli", "forms", "api", "no-code"],
+  "repository": { "type": "git", "url": "git+https://github.com/mrgoonie/tally-cli.git" },
+  "homepage": "https://github.com/mrgoonie/tally-cli#readme",
+  "bugs": { "url": "https://github.com/mrgoonie/tally-cli/issues" },
   "dependencies": {
     "commander": "^12.1.0"
   },

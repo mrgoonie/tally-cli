@@ -5,7 +5,7 @@
   "description": "Manage Tally forms, submissions, webhooks, and workspaces from the terminal.",
   "author": "tally-cli contributors",
   "license": "MIT",
-  "homepage": "https://github.com/your-org/tally-cli",
+  "homepage": "https://github.com/mrgoonie/tally-cli",
   "categories": ["productivity", "no-code", "forms", "api-tools"],
   "keywords": ["tally", "forms", "webhooks", "submissions", "no-code", "cli"],
   "skill": "SKILL.md",
