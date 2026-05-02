@@ -1,0 +1,19 @@
+{
+  "name": "tally-cli",
+  "displayName": "Tally CLI",
+  "version": "0.1.0",
+  "description": "Manage Tally forms, submissions, webhooks, and workspaces from the terminal.",
+  "author": "tally-cli contributors",
+  "license": "MIT",
+  "homepage": "https://github.com/your-org/tally-cli",
+  "categories": ["productivity", "no-code", "forms", "api-tools"],
+  "keywords": ["tally", "forms", "webhooks", "submissions", "no-code", "cli"],
+  "skill": "SKILL.md",
+  "requires": {
+    "cli": ["tally"],
+    "env": ["TALLY_API_KEY"]
+  },
+  "install": {
+    "npm": "tally-cli"
+  }
+}

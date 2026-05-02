@@ -1,0 +1,10 @@
+src/
+tests/
+plans/
+docs/
+claude/
+.github/
+.gitignore
+tsconfig.json
+tsup.config.ts
+vitest.config.ts
